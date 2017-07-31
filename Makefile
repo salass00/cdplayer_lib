@@ -16,8 +16,6 @@ main_SRCS := main/CDActive.c main/CDCurrentTitle.c main/CDEject.c main/CDGetVolu
 
 OBJS := $(SRCS:.c=.o) $(main_SRCS:.c=.o)
 
-RELEASEDIR := ../
-
 .PHONY: all
 all: $(TARGET) examples/simple_play
 
