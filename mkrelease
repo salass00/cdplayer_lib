@@ -1,0 +1,50 @@
+; Script for generating a release archive
+
+make all
+
+set destdir RAM:mkrelease
+set fullvers `version file cdplayer.library`
+set numvers `cut "$fullvers" word 2`
+
+delete all force ${destdir}
+makedir all force ${destdir}/cdplayer_lib-$numvers/Libs
+makedir all force ${destdir}/cdplayer_lib-$numvers/SDK/local/common/include/proto
+makedir all force ${destdir}/cdplayer_lib-$numvers/SDK/local/common/include/interfaces
+makedir all force ${destdir}/cdplayer_lib-$numvers/SDK/local/common/include/inline4
+makedir all force ${destdir}/cdplayer_lib-$numvers/SDK/local/common/include/libraries
+
+copy clone Install ${destdir}/cdplayer_lib-$numvers
+copy clone LICENSE ${destdir}/cdplayer_lib-$numvers
+copy clone releasenotes ${destdir}/cdplayer_lib-$numvers
+copy clone cdplayer.library ${destdir}/cdplayer_lib-$numvers/Libs
+copy clone include/proto/cdplayer.h ${destdir}/cdplayer_lib-$numvers/SDK/local/common/include/proto
+copy clone include/interfaces/cdplayer.h ${destdir}/cdplayer_lib-$numvers/SDK/local/common/include/interfaces
+copy clone include/inline4/cdplayer.h ${destdir}/cdplayer_lib-$numvers/SDK/local/common/include/inline4
+copy clone include/libraries/cdplayer.h ${destdir}/cdplayer_lib-$numvers/SDK/local/common/include/libraries
+
+sed "s/cdplayer_lib-xx.xx/cdplayer_lib-$numvers/g" AutoInstall > ${destdir}/AutoInstall
+
+echo "Short:        Library for asynchronous CDDA playback" > ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme
+echo "Author:       Fredrik Wikstrom" >> ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme
+echo "Uploader:     Fredrik Wikstrom <fredrik@a500.org>" >> ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme
+echo "Type:         util/libs" >> ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme
+echo "Version:      $numvers" >> ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme
+echo "Architecture: ppc-amigaos" >> ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme
+echo "" >> ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme
+type README >> ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme
+
+copy clone ENV:Sys/def_drawer.info ${destdir}/cdplayer_lib-$numvers.info
+copy clone ENV:Sys/def_install.info ${destdir}/cdplayer_lib-$numvers/Install.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/cdplayer_lib-$numvers/LICENSE.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/cdplayer_lib-$numvers/releasenotes.info
+
+changetooltype ${destdir}/cdplayer_lib-$numvers/Install.info ADD "APPNAME=cdplayer.library"
+
+delete force RAM:cdplayer_lib.lha
+lha a -x -r RAM:cdplayer_lib.lha ${destdir}/
+
+echo "RAM:cdplayer_lib.lha created"
+
+copy clone ${destdir}/cdplayer_lib-$numvers/cdplayer_lib.readme RAM:
+
