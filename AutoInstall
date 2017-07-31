@@ -1,0 +1,4 @@
+; AutoInstall script for AmiUpdate
+
+CopyStore cdplayer_lib-xx.xx/Libs/cdplayer.library LIBS:
+
