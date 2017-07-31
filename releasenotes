@@ -1,0 +1,46 @@
+cdplayer.library 52.1 (16.11.2011)
+
+- First released version.
+
+cdplayer.library 52.2 (24.11.2011)
+
+- Rewrote the code so that CDDA decoding (only endian conversion) and volume
+  scaling are now done in one pass instead of two.
+
+- Rewrote CDDA buffering code so that it reads in advance (should work better
+  with real CD/DVD drives than it did before).
+
+- Track numbers in API are now always 1 to NumTracks (the example code gave
+  the impression that in CDPlay at least they are numbered 0 to NumTracks - 1
+  but this appears to be false from testing with other programs).
+
+cdplayer.library 52.3 (25-Nov-2011)
+
+- Fixed a stupid bug in the CDDA buffering which would cause stuttering audio
+  playback especially at the beginning.
+
+cdplayer.library 52.4 (28-Nov-2011)
+
+- Fixed INQUIRY command in CDInfo().
+
+- Changed GetVolume() and SetVolume() implementations so that they return
+  quicker than before.
+
+cdplayer.library 52.5 (30-Nov-2011)
+
+- Increased the size of the CDDA buffers to get more reliable CDDA playback
+  with real CD/DVD drives.
+
+- Changed around the volume setting/getting code so that it now reads/writes
+  all channels in one go and doesn't require any additional locking.
+
+cdplayer.library 52.6 (23-Dec-2011)
+
+- Added CDPlayAddr() function.
+
+cdplayer.library 52.7 (23-Jul-2012)
+
+- CDPLAY_PAUSE now flushes the CDDA buffers so that there won't be any wrong
+  CDDA frames played if a program chooses to resume playback at a different
+  position than the paused one.
+

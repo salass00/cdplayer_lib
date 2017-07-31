@@ -1,0 +1,22 @@
+This is an AmigaOS 4.x rewrite of the V37 cdplayer.library:
+
+http://aminet.net/package/dev/misc/CDPlayerlib37
+
+Rather than letting the CD/DVD drive handle the playback, which doesn't work
+with many newer drives, this version reads the CDDA data directly using the
+SCSI READ CD command and plays it back through AHI.
+
+Installation:
+
+Copy cdplayer.library LIBS:
+
+Source code:
+
+The source code for current and older versions is available on github:
+
+https://github.com/salass00/cdplayer_lib
+
+Changes:
+
+For a list of changes in this and earlier versions see the releasenotes file.
+
