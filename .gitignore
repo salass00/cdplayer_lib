@@ -1,0 +1,7 @@
+# Ignore object files
+*.o
+# Ignore debug exes
+*.debug
+# Ignore exe files
+cdplayer.library
+examples/simple_play
