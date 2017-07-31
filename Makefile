@@ -1,19 +1,21 @@
 CC    := ppc-amigaos-gcc
-AS    := ppc-amigaos-as
 STRIP := ppc-amigaos-strip
 
 CFLAGS  := -O2 -g -Wall -Wwrite-strings -Werror -I. -I./include
-ASFLAGS := -mregnames
 LDFLAGS := -static
 LIBS    := 
 
-TARGET := cdplayer.library
+TARGET  := cdplayer.library
 VERSION := 52
 
-OBJS := init.o cdplayer_68k.o main/CDEject.o main/CDPlay.o main/CDResume.o \
-	main/CDStop.o main/CDJump.o main/CDActive.o main/CDCurrentTitle.o \
-	main/CDTitleTime.o main/CDGetVolume.o main/CDSetVolume.o \
-	main/CDReadTOC.o main/CDInfo.o main/CDPlayAddr.o cdplayer_private.o
+SRCS := init.c cdplayer_68k.c cdplayer_private.c
+
+main_SRCS := main/CDActive.c main/CDCurrentTitle.c main/CDEject.c main/CDGetVolume.c \
+             main/CDInfo.c main/CDJump.c main/CDPlay.c main/CDPlayAddr.c main/CDReadTOC.c \
+             main/CDResume.c main/CDSetVolume.c main/CDStop.c main/CDTitleTime.c
+
+OBJS := $(SRCS:.c=.o) $(main_SRCS:.c=.o)
+
 RELEASEDIR := ../
 
 .PHONY: all
