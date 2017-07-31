@@ -116,11 +116,11 @@ static BPTR libExpunge(struct LibraryManagerInterface *Self) {
 static struct CDPlayerBase *libInit(struct CDPlayerBase *libBase, BPTR seglist, struct ExecIFace *IExec) {
 	libBase->LibNode.lib_Node.ln_Type = NT_LIBRARY;
 	libBase->LibNode.lib_Node.ln_Pri  = 0;
-	libBase->LibNode.lib_Node.ln_Name = CDPLAYERNAME;
+	libBase->LibNode.lib_Node.ln_Name = (STRPTR)CDPLAYERNAME;
 	libBase->LibNode.lib_Flags        = LIBF_SUMUSED|LIBF_CHANGED;
 	libBase->LibNode.lib_Version      = VERSION;
 	libBase->LibNode.lib_Revision     = REVISION;
-	libBase->LibNode.lib_IdString     = VSTRING;
+	libBase->LibNode.lib_IdString     = (STRPTR)VSTRING;
 	libBase->IExec                    = IExec;
 	
 	/* Save pointer to our loaded code (the SegList) */

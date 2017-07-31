@@ -2,7 +2,7 @@ CC    := ppc-amigaos-gcc
 AS    := ppc-amigaos-as
 STRIP := ppc-amigaos-strip
 
-CFLAGS  := -O2 -g -Wall -Wno-write-strings -Werror -I. -I./include
+CFLAGS  := -O2 -g -Wall -Wwrite-strings -Werror -I. -I./include
 ASFLAGS := -mregnames
 LDFLAGS := -static
 LIBS    := 
@@ -31,7 +31,7 @@ examples/simple_play: examples/simple_play.o
 	$(CC) $(LDFLAGS) -o $@.debug $^ $(LIBS)
 	$(STRIP) -R.comment -o $@ $@.debug
 
-examples/simple_play.o: CFLAGS += -D__USE_INLINE__ -Wno-deprecated-declarations -Wno-parentheses
+examples/simple_play.o: CFLAGS += -D__USE_INLINE__ -Wno-deprecated-declarations
 
 .PHONY: clean
 clean:
