@@ -3,7 +3,7 @@
 (copylib
 	(prompt "Copying cdplayer.library")
 	(help @copylib-help)
-	(source "cdplayer.library")
+	(source "Libs/cdplayer.library")
 	(dest @default-dest)
 )
 (exit)
